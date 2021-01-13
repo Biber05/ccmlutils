@@ -1,17 +1,17 @@
 from os.path import join
-from typing import Dict, Tuple, List, Optional, Any
+from typing import Tuple, List, Optional, Any
 
 import tensorflow.keras.preprocessing.image as keras_image
 
 
 def get_image_flow_directory_generator(
-    filepath: str,
-    batch_size: int,
-    sub_dir: Optional[str] = None,
-    target_size: Optional[Tuple[int, int]] = None,
-    rescale: Optional[float] = None,
-    classes: Optional[List[str]] = None,
-    shuffle: bool = False,
+        filepath: str,
+        batch_size: int,
+        sub_dir: Optional[str] = None,
+        target_size: Optional[Tuple[int, int]] = None,
+        rescale: Optional[float] = None,
+        classes: Optional[List[str]] = None,
+        shuffle: bool = False,
 ) -> Any:
     """
     Creates an image dataset for training or testing

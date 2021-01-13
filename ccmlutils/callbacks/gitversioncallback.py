@@ -1,17 +1,17 @@
 from typing import List
 
-from tensorflow_core.python.keras.callbacks import Callback
+import yaml
+from tensorflow.python.keras.callbacks import Callback
 
 from ccmlutils.utilities.gitutils import (
     get_git_revision_hash,
     get_git_revision_of_module,
     NoGitHashAvailable,
 )
-import yaml
 
 
 def produce_git_version_yaml(
-    filepath: str, git_dirs: List[str] = [], git_modules: List[str] = []
+        filepath: str, git_dirs: List[str] = [], git_modules: List[str] = []
 ):
     git_dirs: List[str] = [git_dirs] if type(git_dirs) is str else git_dirs
     git_modules: List[str] = [git_modules] if type(git_modules) is str else git_modules

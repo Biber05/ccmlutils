@@ -1,24 +1,23 @@
 from typing import Optional, Callable
 
+from tensorflow.keras.callbacks import Callback
 from tensorflow.keras.losses import Loss
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Optimizer
-from tensorflow.keras.callbacks import Callback
 from tensorflow.keras.utils import Sequence
 
 
 def fit_generator(
-    model: Callable[[], Model],
-    train_set,
-    validation_set,
-    epochs: int,
-    optimizer: Optimizer,
-    loss: Loss,
-    callbacks=None,
-    steps_per_epoch: Optional[int] = None,
-    validation_steps: Optional[int] = None,
+        model: Callable[[], Model],
+        train_set,
+        validation_set,
+        epochs: int,
+        optimizer: Optimizer,
+        loss: Loss,
+        callbacks=None,
+        steps_per_epoch: Optional[int] = None,
+        validation_steps: Optional[int] = None,
 ):
-
     model = model()
     model.compile(optimizer=optimizer, loss=loss, metrics=["accuracy"])
     # This callback is only temporary till issue in tf.keras is fixed where

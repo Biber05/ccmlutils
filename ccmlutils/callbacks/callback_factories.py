@@ -1,6 +1,6 @@
 from os.path import join
 
-from tensorflow_core.python.keras.callbacks import ModelCheckpoint, CSVLogger
+from tensorflow.python.keras.callbacks import ModelCheckpoint, CSVLogger
 
 from ccmlutils.callbacks.ccmlprojectcallback import CCMLProjectCallback
 from ccmlutils.callbacks.gitversioncallback import GitVersionCallback

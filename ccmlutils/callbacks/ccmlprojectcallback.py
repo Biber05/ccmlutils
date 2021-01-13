@@ -2,7 +2,7 @@ from os.path import join
 from typing import List, Optional
 
 import yaml
-from tensorflow_core.python.keras.callbacks import Callback, CSVLogger
+from tensorflow.python.keras.callbacks import CSVLogger, Callback
 
 from ccmlutils.callbacks.gitversioncallback import produce_git_version_yaml
 from ccmlutils.config import envconfig as envc
@@ -21,15 +21,15 @@ def produce_project_info(filepath: str, exp_prefix: str or None):
 
 class CCMLProjectCallback(Callback):
     def __init__(
-        self,
-        log_path: str,
-        git_dirs: List[str] = [],
-        git_modules: List[str] = [],
-        git_version_filename: str = "git_versions.yml",
-        project_info_filename: str = "project_info.yml",
-        enable_train_logging: bool = True,
-        train_log_file: str = "train_logs.csv",
-        exp_prefix: str = None,
+            self,
+            log_path: str,
+            git_dirs: List[str] = [],
+            git_modules: List[str] = [],
+            git_version_filename: str = "git_versions.yml",
+            project_info_filename: str = "project_info.yml",
+            enable_train_logging: bool = True,
+            train_log_file: str = "train_logs.csv",
+            exp_prefix: str = None,
     ):
         super().__init__()
         self.git_dirs: List[str] = [git_dirs] if type(git_dirs) is str else git_dirs

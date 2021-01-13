@@ -1,11 +1,9 @@
 from pathlib import Path
 from typing import Optional, Dict, Any
 
-
-from kedro.io import AbstractVersionedDataSet, Version, DataSetError
 import tensorflow as tf
-from tensorflow_core.python.keras.models import Model
-from tensorflow_core.python.keras.saving.save import load_model
+from kedro.io import AbstractVersionedDataSet, Version, DataSetError
+from tensorflow.python.keras.models import Model, load_model
 
 
 class KerasModelDataset(AbstractVersionedDataSet):
@@ -32,4 +30,4 @@ class KerasModelDataset(AbstractVersionedDataSet):
         return Path(path).exists()
 
     def _describe(self) -> Dict[str, Any]:
-        return dict(filepath=self._filepath, version=self._version,)
+        return dict(filepath=self._filepath, version=self._version, )

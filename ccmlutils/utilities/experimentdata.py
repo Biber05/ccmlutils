@@ -3,10 +3,9 @@ from dataclasses import dataclass
 from os.path import join
 from typing import Tuple, List
 
-import yaml
-import pandas as pd
 import numpy as np
-
+import pandas as pd
+import yaml
 from pandas.errors import EmptyDataError
 
 from ccmlutils.config.envconfig import RUN_ID_KEY, SHORT_ID_KEY
@@ -48,12 +47,12 @@ class EmptyExperimentError(Exception):
 
 class ExperimentData(object):
     def __init__(
-        self,
-        filepath: str,
-        project_info_file="project_info.yml",
-        train_log_file="train_logs.csv",
-        model_subfolder: str = "models",
-        epoch_formatting: str = "ep{epoch:03d}",
+            self,
+            filepath: str,
+            project_info_file="project_info.yml",
+            train_log_file="train_logs.csv",
+            model_subfolder: str = "models",
+            epoch_formatting: str = "ep{epoch:03d}",
     ):
         self.filepath = filepath
         self.project_info_file = project_info_file
