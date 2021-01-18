@@ -27,7 +27,7 @@ def fit_generator(
         callbacks = [cb]
     else:
         callbacks.append(cb)
-    history = model.fit_generator(
+    history = model.fit(
         train_set,
         epochs=epochs,
         validation_data=validation_set,

@@ -10,12 +10,12 @@ from ccmlutils.utilities.predictionutils import Predictions, prediction_factory
 def defaulttest(test_set, experiment: ExperimentData) -> Predictions:
     model_path = experiment.get_model_path()
     model: Model = load_model(model_path)
-    preds_output = model.predict_generator(test_set)
+    pred_output = model.predict(test_set)
     filenames = test_set.filenames
     class_indices = test_set.class_indices
     classes = test_set.classes
     predictions: Predictions = prediction_factory(
-        preds_output, filenames, classes, class_indices
+        pred_output, filenames, classes, class_indices
     )
 
     return predictions
