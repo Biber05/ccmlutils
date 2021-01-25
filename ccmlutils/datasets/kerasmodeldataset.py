@@ -30,4 +30,7 @@ class KerasModelDataset(AbstractVersionedDataSet):
         return Path(path).exists()
 
     def _describe(self) -> Dict[str, Any]:
-        return dict(filepath=self._filepath, version=self._version, )
+        return dict(
+            filepath=self._filepath,
+            version=self._version,
+        )

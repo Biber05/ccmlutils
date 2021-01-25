@@ -8,6 +8,7 @@ def yaml_list_from_dirs(source_path: str, dst_file: str) -> str:
     folders = list(filter(lambda x: os.path.isdir(os.path.join(source_path, x)), files))
 
     import yaml
+
     output = yaml.dump(folders, indent=len(folders))
 
     with open(dst_file, mode="w+") as file:

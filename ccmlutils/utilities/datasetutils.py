@@ -14,13 +14,15 @@ def split_train_test_data(path: str, split_size: float = 0.7) -> tuple:
 
     for label in labels:
         import os
+
         files = os.listdir(os.path.join(path, label))
 
         import random
+
         random.shuffle(files)
         split_idx = int(len(files) * split_size)
-        train = files[0: split_idx]
-        test = files[split_idx: len(files)]
+        train = files[0:split_idx]
+        test = files[split_idx : len(files)]
 
         for img in train:
             _move_file(path, label, img, "train")
@@ -46,6 +48,7 @@ def _move_file(path: str, label: str, img: str, data_set: str):
 
     """
     import shutil
+
     shutil.move(f"{path}/{label}/{img}", f"{path}/{data_set}/{label}/{img}")
 
 
@@ -59,6 +62,7 @@ def _read_label(path: str) -> [str]:
         list of subdirectories
     """
     from pathlib import Path
+
     files = Path(path).iterdir()
     folders = list(map(lambda y: str(y.name), filter(lambda x: x.is_dir(), files)))
     return list(filter(lambda x: "train" not in x and "test" not in x, folders))
@@ -74,6 +78,7 @@ def _mkdir(path: str, labels: [str]):
 
     """
     from pathlib import Path
+
     for label in labels:
         Path(path).joinpath("test").joinpath(label).mkdir(parents=True, exist_ok=True)
         Path(path).joinpath("train").joinpath(label).mkdir(parents=True, exist_ok=True)
@@ -90,5 +95,6 @@ def _rm_old_dirs(path: str, labels: [str]):
 
     """
     from pathlib import Path
+
     for label in labels:
         Path(path).joinpath(label).rmdir()

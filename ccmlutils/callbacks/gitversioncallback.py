@@ -11,7 +11,7 @@ from ccmlutils.utilities.gitutils import (
 
 
 def produce_git_version_yaml(
-        filepath: str, git_dirs: List[str] = [], git_modules: List[str] = []
+    filepath: str, git_dirs: List[str] = [], git_modules: List[str] = []
 ):
     git_dirs: List[str] = [git_dirs] if type(git_dirs) is str else git_dirs
     git_modules: List[str] = [git_modules] if type(git_modules) is str else git_modules
@@ -35,9 +35,9 @@ class GitVersionCallback(Callback):
         super().__init__()
         self.filepath = filepath
         self.git_dirs: List[str] = [git_dirs] if type(git_dirs) is str else git_dirs
-        self.git_modules: List[str] = [git_modules] if type(
-            git_modules
-        ) is str else git_modules
+        self.git_modules: List[str] = (
+            [git_modules] if type(git_modules) is str else git_modules
+        )
 
     def on_train_begin(self, logs=None):
         produce_git_version_yaml(self.filepath, self.git_dirs, self.git_modules)

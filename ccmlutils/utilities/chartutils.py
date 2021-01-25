@@ -2,13 +2,13 @@ import altair
 
 
 def generate_hover_charts(
-        source,
-        x_name: str,
-        y_name: str,
-        base_chart,
-        width: int,
-        height: int,
-        text_name: str,
+    source,
+    x_name: str,
+    y_name: str,
+    base_chart,
+    width: int,
+    height: int,
+    text_name: str,
 ):
     # Create a selection that chooses the nearest point & selects based on x-value
     nearest = altair.selection(
@@ -19,9 +19,12 @@ def generate_hover_charts(
     # the x-value of the cursor
     selectors = (
         altair.Chart(source)
-            .mark_point()
-            .encode(x=x_name, opacity=altair.value(0), )
-            .add_selection(nearest)
+        .mark_point()
+        .encode(
+            x=x_name,
+            opacity=altair.value(0),
+        )
+        .add_selection(nearest)
     )
 
     # Draw points on the line, and highlight based on selection
@@ -37,9 +40,11 @@ def generate_hover_charts(
     # Draw a rule at the location of the selection
     rules = (
         altair.Chart(source)
-            .mark_rule(color="gray")
-            .encode(x=x_name + ":Q", )
-            .transform_filter(nearest)
+        .mark_rule(color="gray")
+        .encode(
+            x=x_name + ":Q",
+        )
+        .transform_filter(nearest)
     )
 
     final = altair.layer(base_chart, selectors, points, rules, text).properties(
@@ -50,7 +55,15 @@ def generate_hover_charts(
 
 
 def generate_chart(source, metric):
-    line = altair.Chart(source).mark_line().encode(x="epoch", y=metric, color="name", )
+    line = (
+        altair.Chart(source)
+        .mark_line()
+        .encode(
+            x="epoch",
+            y=metric,
+            color="name",
+        )
+    )
 
     # Create a selection that chooses the nearest point & selects based on x-value
     nearest = altair.selection(
@@ -61,9 +74,12 @@ def generate_chart(source, metric):
     # the x-value of the cursor
     selectors = (
         altair.Chart(source)
-            .mark_point()
-            .encode(x="epoch", opacity=altair.value(0), )
-            .add_selection(nearest)
+        .mark_point()
+        .encode(
+            x="epoch",
+            opacity=altair.value(0),
+        )
+        .add_selection(nearest)
     )
 
     # Draw points on the line, and highlight based on selection
@@ -79,9 +95,11 @@ def generate_chart(source, metric):
     # Draw a rule at the location of the selection
     rules = (
         altair.Chart(source)
-            .mark_rule(color="gray")
-            .encode(x="epoch:Q", )
-            .transform_filter(nearest)
+        .mark_rule(color="gray")
+        .encode(
+            x="epoch:Q",
+        )
+        .transform_filter(nearest)
     )
 
     final = altair.layer(line, selectors, points, rules, text).properties(

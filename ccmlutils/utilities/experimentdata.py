@@ -47,12 +47,12 @@ class EmptyExperimentError(Exception):
 
 class ExperimentData(object):
     def __init__(
-            self,
-            filepath: str,
-            project_info_file="project_info.yml",
-            train_log_file="train_logs.csv",
-            model_subfolder: str = "models",
-            epoch_formatting: str = "ep{epoch:03d}",
+        self,
+        filepath: str,
+        project_info_file="project_info.yml",
+        train_log_file="train_logs.csv",
+        model_subfolder: str = "models",
+        epoch_formatting: str = "ep{epoch:03d}",
     ):
         self.filepath = filepath
         self.project_info_file = project_info_file
