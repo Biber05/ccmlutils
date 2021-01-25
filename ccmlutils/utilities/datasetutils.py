@@ -1,10 +1,11 @@
-def split_train_test_data(path: str, split_size: float = 0.7) -> tuple:
+def split_train_test_data(path: str, split_size: float = 0.7, create_validation_set: bool = True) -> tuple:
     """
     Splits a directory with images into test and train subsets ordered by class
 
     Args:
         path: path including all images
         split_size: ratio - 0.7 => 70% train and 30% test
+        create_validation_set: if set to True 10% will be used as a validation subset - 90% will be split by split rate
 
     Returns:
         tuple of paths to train and test data set
@@ -20,9 +21,22 @@ def split_train_test_data(path: str, split_size: float = 0.7) -> tuple:
         import random
 
         random.shuffle(files)
-        split_idx = int(len(files) * split_size)
+
+        if create_validation_set:
+            validation_split_idx = int(len(files) * 0.9)
+            split_idx = int(validation_split_idx * split_size)
+            validation_set = files[validation_split_idx:]
+
+            for img in validation_set:
+                _move_file(path, label, img, "validation")
+
+            files = files[0: validation_split_idx]
+
+        else:
+            split_idx = int(len(files) * split_size)
+
         train = files[0:split_idx]
-        test = files[split_idx : len(files)]
+        test = files[split_idx: len(files)]
 
         for img in train:
             _move_file(path, label, img, "train")
@@ -65,7 +79,7 @@ def _read_label(path: str) -> [str]:
 
     files = Path(path).iterdir()
     folders = list(map(lambda y: str(y.name), filter(lambda x: x.is_dir(), files)))
-    return list(filter(lambda x: "train" not in x and "test" not in x, folders))
+    return list(filter(lambda x: "train" not in x and "test" not in x and "validation" not in x, folders))
 
 
 def _mkdir(path: str, labels: [str]):
@@ -82,6 +96,7 @@ def _mkdir(path: str, labels: [str]):
     for label in labels:
         Path(path).joinpath("test").joinpath(label).mkdir(parents=True, exist_ok=True)
         Path(path).joinpath("train").joinpath(label).mkdir(parents=True, exist_ok=True)
+        Path(path).joinpath("validation").joinpath(label).mkdir(parents=True, exist_ok=True)
 
 
 def _rm_old_dirs(path: str, labels: [str]):
